@@ -1,0 +1,25 @@
+<div *ngIf="clima" class="text-center">
+  <hr>
+
+  <div class="flex flex-col items-center bg-[#1178D7] text-white p-2 rounded-md mb-6">
+    <img [src]="getWeatherIconUrl(clima.current.icon_num)" alt="Weather Icon" class="mb-2 w-16 h-16">
+    <h2 class="mb-4">Condiciones Actuales</h2>
+    <p class="mb-4">{{ clima.current.summary }} </p>
+    <p class="font-normal text-3xl text-white mb-4"> {{ clima.current.temperature }} °C</p>
+    <p class="mb-4">Viento: {{ clima.current.wind.speed }} m/s, {{ clima.current.wind.dir }}</p>
+    <p class="mb-4">Precipitación: {{ clima.current.precipitation.total }} mm</p>
+    <p class="mb-4">Cobertura de nubes: {{ clima.current.cloud_cover }}%</p>
+  </div>
+
+  <div class="w-full md:w-3/4">
+    <h2 class="text-xl font-bold mb-4">Próximos días</h2>
+    <ul class="flex space-x-4">
+      <li *ngFor="let dia of clima.daily.data" class="flex flex-col items-center text-center">
+        <span class="text-gray-700">{{ dia.day | date: 'EEEE' }}</span>
+        <span class="text-gray-500">{{ dia.weather }}</span>
+        <span class="text-lg font-bold">{{ dia.all_day.temperature_min }} / {{ dia.all_day.temperature_max }} °C</span>
+        <img [src]="getWeatherIconUrl(dia.icon)" alt="Weather Icon" class="w-16 h-16">
+      </li>
+    </ul>
+  </div>
+</div>
